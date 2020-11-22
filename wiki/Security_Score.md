@@ -1,4 +1,6 @@
-amount of servers
+# Security Score
+
+### First thoughts
 
 - amount of servers
 	- DNS -> poisoning
