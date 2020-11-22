@@ -22,3 +22,8 @@
 - location server
 	- data privacy
 	- which government is in charge
+
+- bad configuration (!pen testing)
+	- ssh
+	- telnet
+	- sql injections
