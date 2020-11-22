@@ -27,3 +27,11 @@
 	- ssh
 	- telnet
 	- sql injections
+
+Later when combining projects:
+- ads
+    - is data shared with big companys like google, facebook
+    
+- libraries
+    - how many are used -> dependent on a lot
+    - outdated
