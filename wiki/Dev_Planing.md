@@ -8,7 +8,8 @@
         - get their ips
         - their server locations
         - their configurations
-if subdomain (www.google.com)
+
+- if subdomain (www.google.com)
     - find main-domain
         - get the ip
         - find subdomains
@@ -23,7 +24,7 @@ if subdomain (www.google.com)
         - get their ips
         - their server locations
         - their configurations
-if subdomain (www.google.com)
+- if subdomain (www.google.com)
     - find main-domain
         - get the ip
         - find subdomains
