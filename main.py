@@ -5,6 +5,7 @@
 import sys
 import socket
 import os
+from data_collection_tools import ip_finder
 
 
 class DataCollectionTool:
@@ -12,6 +13,8 @@ class DataCollectionTool:
     def __init__(self, _ip='', _domain=''):
         self.domain = _domain
         self.ip = _ip
+
+        self.subdomains = []
         self.data = dict()
 
         self._complete_data()
@@ -24,6 +27,13 @@ class DataCollectionTool:
             self.domain = socket.gethostbyaddr(self.ip)[0]
 
     def collect(self):
+        # Get all the subdomains of the given domain / ip
+        # self.subdomains = get_subdomains(self.domain)
+        self.data['domains'] = self.subdomains
+
+        # Get all corresponding ips of sub_domains
+        self.data['domain-ips'] = ip_finder.get_all_ips(self.subdomains)
+
         # if domain
             # find subdomains
                 # ips
