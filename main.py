@@ -5,7 +5,6 @@
 import sys
 import socket
 import os
-from data_collection_tools import ip_finder
 
 
 class DataCollectionTool:
@@ -20,27 +19,36 @@ class DataCollectionTool:
     def _complete_data(self):
         if self.domain != "" and self.ip == "":
             self.ip = socket.gethostbyname(self.domain)
-        elif self.ip != "" and not self.domain == "":
+
+        elif self.ip != "" and self.domain == "":
             self.domain = socket.gethostbyaddr(self.ip)[0]
 
     def collect(self):
-        # get all ip addresses
-        self.data['ip-address'] = ip_finder.IPFinder(self.ip, self.domain).collect()
+        # if domain
+            # find subdomains
+                # ips
+                # server locations
+                # configs
 
-        # get all server types based on ip addresses
-
-        # get the location of all server
-
-        # get all (sub)domains
+        # if subdomain
+            # find domain
+                # ip
+                # location
+                # config
+            # find subdomains
+                # ips
+                # location
+                # configs
 
         pass
 
     def present(self):
-        pass
+        os.system(f'clear')
+        print(f'Collected information based on {self.domain} and {self.ip}')
 
 
 def print_help():
-    print("Inputs couldn't be parsed correctly\nUsage: python main.py -ip [ip-address] -d [domain]")
+    print("Inputs couldn't be parsed correctly\nUsage:\tpython main.py\n\t\t\t-ip [ip-address]\n\t\t\t-d  [domain]\n")
 
 
 def check_ip(x):
@@ -64,7 +72,7 @@ if __name__ == '__main__':
     if OUTPUT: os.system('clear')
 
     # check amount of parameters
-    if len(sys.argv) < 3 or len(sys.argv) > 5:
+    if len(sys.argv) < 3 or len(sys.argv) > 3:
         print_help()
         exit(1)
 
