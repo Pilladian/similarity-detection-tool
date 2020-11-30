@@ -2,7 +2,7 @@
 
 ## Main Class
 - One main class in which all collecting tools are imported
-- given an ip or domain or both
+- given ip or domain
 - collects data
 - presents data
 
