@@ -1,0 +1,29 @@
+# character, typo_01, typo_02, ..., type_n
+q, w, s, a, 1, 2
+w, e, d, s, a, q, 2, 3
+e, r, f, d, s, w, 3, 4
+r, t, f, d, e, 4, 5
+t, z, g, f, r, 5, 6
+z, u, h, g, t, 6, 7
+y, u, h, g, t, 6, 7
+u, i, j, h, z, 7, 8
+i, o, k, j, u, 8, 9
+o, p, l, k, i, 9, 0
+p, l, o, 0
+a, s, y, q, w
+s, d, x, y, a, w, e
+d, f, c, x, s, e, r
+f, g, v, c, d, r, t
+g, h, b, v, f, t, z
+h, j, n, b, g, z, u
+j, k, m, n, h, u, i
+k, l, m, j, u, i, o
+l, i, o, p
+y, x, a, s
+z, x, a, s
+x, c, s, d
+c, v, x, d, f
+v, b, c, f, g
+b, n, v, g, h
+n, m, b, h, j
+m, n, j, k

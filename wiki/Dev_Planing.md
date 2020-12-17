@@ -1,10 +1,33 @@
 # Planing
 
 ## Structure
-- ip address : domainname of that specific ip
-- domainname : ip address of that specific domain
+#### Given IP address
+- get corresponding domain
+- if domain (google.com)
+    - find subdomains
+        - get their ips
+        - their server locations
+        - their configurations
 
-- nedded: find all subdomains for given ip oder domain to collect all ips and domains
-  - broblamatic : need one for finding the other
-  - possibilities:
-    - bruteforce most common subdomains (www, mail, talk, ...)
+- if subdomain (www.google.com)
+    - find main-domain
+        - get the ip
+        - find subdomains
+            - get their ips
+            - their server locations
+            - their configurations
+
+#### Given Domain
+- get corresponding ip
+- if domain (google.com)
+    - find subdomains
+        - get their ips
+        - their server locations
+        - their configurations
+- if subdomain (www.google.com)
+    - find main-domain
+        - get the ip
+        - find subdomains
+            - get their ips
+            - their server locations
+            - their configurations
