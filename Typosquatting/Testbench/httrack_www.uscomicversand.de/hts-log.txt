@@ -1,0 +1,35 @@
+HTTrack3.49-2 launched on Thu, 17 Dec 2020 15:20:50 at https://www.uscomicversand.de/neu-ausgepackt/index.htm
+(httrack https://www.uscomicversand.de/neu-ausgepackt/index.htm -O httrack_www.uscomicversand.de )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+15:21:32	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/media/favicon/apple-icon-57x57.png (from https://www.uscomicversand.de/neu-ausgepackt/index.htm)
+15:21:32	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/media/favicon/apple-icon-60x60.png (from https://www.uscomicversand.de/neu-ausgepackt/index.htm)
+15:21:32	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/media/favicon/apple-icon-72x72.png (from https://www.uscomicversand.de/neu-ausgepackt/index.htm)
+15:21:32	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/media/favicon/apple-icon-76x76.png (from https://www.uscomicversand.de/neu-ausgepackt/index.htm)
+15:21:32	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/media/favicon/apple-icon-114x114.png (from https://www.uscomicversand.de/neu-ausgepackt/index.htm)
+15:21:32	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/media/favicon/apple-icon-120x120.png (from https://www.uscomicversand.de/neu-ausgepackt/index.htm)
+15:21:32	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/media/favicon/apple-icon-144x144.png (from https://www.uscomicversand.de/neu-ausgepackt/index.htm)
+15:21:32	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/media/favicon/apple-icon-152x152.png (from https://www.uscomicversand.de/neu-ausgepackt/index.htm)
+15:21:32	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/media/favicon/apple-icon-180x180.png (from https://www.uscomicversand.de/neu-ausgepackt/index.htm)
+15:21:32	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/media/favicon/android-icon-192x192.png (from https://www.uscomicversand.de/neu-ausgepackt/index.htm)
+15:21:32	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/media/favicon/favicon-32x32.png (from https://www.uscomicversand.de/neu-ausgepackt/index.htm)
+15:21:32	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/media/favicon/favicon-96x96.png (from https://www.uscomicversand.de/neu-ausgepackt/index.htm)
+15:21:32	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/media/favicon/favicon-16x16.png (from https://www.uscomicversand.de/neu-ausgepackt/index.htm)
+15:21:32	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/media/favicon/manifest.json (from https://www.uscomicversand.de/neu-ausgepackt/index.htm)
+15:21:32	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/{text:false, icons:{primary:'ui-icon-search'}} (from https://www.uscomicversand.de/neu-ausgepackt/index.htm)
+15:21:32	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/{maxElements:12, horizontalAlign:'left'} (from https://www.uscomicversand.de/neu-ausgepackt/index.htm)
+15:22:38	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/{text:true, icons:{secondary:'ui-icon-info'}} (from https://www.uscomicversand.de/neu-ausgepackt/index.htm)
+15:22:48	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/{text:true, icons:{primary:'ui-icon-cart'}} (from https://www.uscomicversand.de/neu-ausgepackt/avengers-west-coast-epic-collection-vol-3-tales-to.htm)
+15:22:48	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/{"validate":{"required":true,"email":true,"messages":{"required":"Bitte geben Sie Ihre Emailadresse ein","email":"Dies ist keine gültige Emailadresse"}}} (from https://www.uscomicversand.de/neu-ausgepackt/avengers-west-coast-epic-collection-vol-3-tales-to.htm)
+15:22:48	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/{"validate":{"required":true,"messages":{"required":"Bitte schreiben Sie hier Ihre Anfrage hin"}}} (from https://www.uscomicversand.de/neu-ausgepackt/avengers-west-coast-epic-collection-vol-3-tales-to.htm)
+15:22:48	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/interner-fehler.htm (from https://www.uscomicversand.de/neu-ausgepackt/avengers-west-coast-epic-collection-vol-3-tales-to.htm)
+15:22:48	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/erfolgreich-gesendet.htm (from https://www.uscomicversand.de/neu-ausgepackt/avengers-west-coast-epic-collection-vol-3-tales-to.htm)
+15:22:48	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/{icons: {secondary: "ui-icon-triangle-1-e"}} (from https://www.uscomicversand.de/neu-ausgepackt/avengers-west-coast-epic-collection-vol-3-tales-to.htm)
+15:22:48	Error: 	"Not Found" (404) at link https://www.uscomicversand.de/neu-ausgepackt/{maxElements:12, horizontalAlign:'right'} (from https://www.uscomicversand.de/neu-ausgepackt/house-of-x-powers-of-x.htm)
+
+HTTrack Website Copier/3.49-2 mirror complete in 1 minutes 58 seconds : 118 links scanned, 93 files written (8615212 bytes overall) [1481591 bytes received at 12555 bytes/sec], 8615282 bytes transferred using HTTP compression in 94 files, ratio 16%, 59.0 requests per connection
+(24 errors, 0 warnings, 0 messages)
