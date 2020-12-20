@@ -1,7 +1,5 @@
 # Python 3.8
 
-import random
-
 char_swap = {}
 
 char_swap['a'] = ['ɑ', 'α']
@@ -31,20 +29,43 @@ char_swap['x'] = ['᙮']
 char_swap['y'] = ['ʏ']
 char_swap['z'] = ['ｚ']
 
-with open('original_index.html', 'r') as f:
-	new = ""
-	lines = f.readlines()
-	
-	for line in lines[:-1]:
-		for char in line:
-			try:
-				ind = random.randint(0, len(char_swap[char]))
-				new += char_swap[char][ind]
-			except:
-				new += char
-		new += "\n"
-	
-	with open('swapped.html', 'w') as sw:
-		sw.write(new)
+
+def _swap(code_line, swap_phrase):
+    swapped_line = ""
+    _start = code_line.find(swap_phrase)
+    _end = _start + len(swap_phrase)
+
+    replacement = code_line[_start:_end]
+    swapped_line += code_line[:_start]
+
+    for a in replacement:
+        if a == 'n':
+            swapped_line += char_swap[a][1]
+        elif a == 'a':
+            swapped_line += char_swap[a][0]
+        elif a == 'u':
+            swapped_line += char_swap[a][0]
+        else:
+            swapped_line += a
+
+    swapped_line += code_line[_end:]
+    return swapped_line
 
 
+with open('original_index.html', 'r') as f, open('swapped.html', 'w') as sw:
+    new = ""
+    phrases = ['Connect with friends and the world around you on Facebook.',
+               'Email or Phone Number',
+               'Password',
+               'Log In',
+               'Create New Account']
+    read_content = f.readlines()
+
+    for line in read_content:
+        _line = line
+        for phrase in phrases:
+            if phrase in _line:
+                _line = _swap(_line, phrase)
+        new += _line
+
+    sw.write(new)
