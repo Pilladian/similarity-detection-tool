@@ -60,7 +60,7 @@ def _compare(url1, url2, threshold):
         if line in psl1:
             same2 += 1
 
-    value = float((same1 + same2) / (len(psl1) + len(psl2)) )
+    value = float((same1 + same2) / (len(psl1) + len(psl2)))
 
     if value >= threshold:
         suspicious = True
