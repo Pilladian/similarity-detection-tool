@@ -74,4 +74,4 @@ if __name__ == '__main__':
     u2 = sys.argv[2]
 
     sus, val = _compare(u1, u2, _THRESHOLD)
-    print(f'{val:.2} >= {_THRESHOLD} --> Suspicious' if val else f'{val} < {_THRESHOLD} --> Not suspicious')
+    print(f'{val:.2} >= {_THRESHOLD} --> Suspicious' if sus else f'{val:.2} < {_THRESHOLD} --> Not suspicious')
