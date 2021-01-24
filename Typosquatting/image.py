@@ -19,6 +19,19 @@ def scale(i1, i2):
     return i1, resized
 
 
+def test():
+    # original = cv2.imread('/home/us3r/Downloads/original_facebook.svg')
+    duplicate = cv2.imread('/home/us3r/Downloads/different_color_facebook.png')
+    original = cv2.imread('/home/us3r/Downloads/different_color_facebook.png')
+
+    original, duplicate = scale(original, duplicate)
+
+    diff = cv2.subtract(original, duplicate)
+
+    sift = xfeatures2d.SIFT_create()
+
+
+
 image1 = cv2.imread("/home/us3r/Pictures/Me/20190724_231224.jpg")
 image2 = cv2.imread("/home/us3r/Pictures/Memes/Screenshot_20200617-134129_9GAG.jpg")
 
@@ -28,3 +41,6 @@ mse = mse(image1, image2)
 ssim = ssim(image1, image2, multichannel=True)
 
 print(mse, ssim)
+
+
+test()

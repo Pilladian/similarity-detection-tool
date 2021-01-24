@@ -134,7 +134,6 @@ def _compare_image_sources(url1, url2):
     va = 0.0
     for a in image_l1:
         for b in image_l2:
-            print(a, b)
             va += _calculate_score(a, b)
 
     try:
