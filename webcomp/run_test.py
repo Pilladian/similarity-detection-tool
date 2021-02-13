@@ -27,3 +27,8 @@ if __name__ == '__main__':
 
     os.system('clear')
     run(files)
+
+    print(f'suggested thresholds:'
+          f'\nMSE:\t5000 (alert if value > 5000)'
+          f'\nSSIM:\t0.85 (alert if value > 0.85)'
+          f'\nSIM:\t0.95 (alert if value > 0.95)')
