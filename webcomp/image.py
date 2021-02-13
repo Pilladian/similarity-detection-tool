@@ -15,7 +15,7 @@ def mse(img1, img2):
     return err
 
 
-def diff(path1, path2):
+def sim(path1, path2):
     i1 = Image.open(path1)
     i2 = Image.open(path2)
 
@@ -40,7 +40,7 @@ image1, image2 = scale(image1, image2)
 
 mse = mse(image1, image2)
 ssim = ssim(image1, image2, multichannel=True)
-diff = diff(sys.argv[1], sys.argv[2])
+sim = sim(sys.argv[1], sys.argv[2])
 
-print(f'MSE:\t{mse}\nSSIM:\t{ssim}\nDiff:\t{diff}')
+print(f'MSE:\t{mse}\nSSIM:\t{ssim}\nSim:\t{sim}')
 # print(f'MSE:\t{mse}\t(the smaller the better)\nSSIM:\t{ssim}\t(the closer to 1 the better')
