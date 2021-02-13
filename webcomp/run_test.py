@@ -8,14 +8,15 @@ def run(file_pairs):
     for desc, file1, file2 in file_pairs:
         print(f'Test running: {desc}')
         os.system(f'python3 image.py {file1} {file2}')
-        print('\n')
+        print()
 
 
 if __name__ == '__main__':
     root_path = 'testbench/'
 
     files = [
-        ('Logo Color', 'facebook_logo_different_color.png', 'facebook_logo_original.png'),
+        ('Logo Color Full', 'facebook_logo_different_color.png', 'facebook_logo_original.png'),
+        ('Logo Color 2 Letters', 'facebook_logo_2_letters_different_color.png', 'facebook_logo_original.png'),
         ('Zoomed', 'facebook_screenshot.png', 'facebook_screenshot_zoomed_out.png'),
         ('Regular Website 1', 'facebook_screenshot.png', 'ragular_screenshot_1.png'),
         ('Regular Website 2', 'facebook_screenshot.png', 'regular_screenshot_2.png'),
