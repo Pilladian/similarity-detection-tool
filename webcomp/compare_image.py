@@ -1,34 +1,46 @@
 # Python 3.8
 
+from skimage.metrics import structural_similarity as ssim
+import numpy as np
+import cv2
 import sys
 from PIL import Image
 import imgcompare
 
 
-def _scale(img1, img2):
-    width, height = img1.size
-    img2 = img2.resize((width, height))
-    img2 = img2.convert(img1.mode)
+def mse(img1, img2):
+    err = np.sum((img1.astype('float') - img2.astype('float')) ** 2)
+    err /= float(img1.shape[0] * img2.shape[1])
 
-    return img1, img2
-
-
-def _compare_images(img_path_1, img_path_2):
-    try:
-        i1 = Image.open(img_path_1)
-        i2 = Image.open(img_path_2)
-
-        si1, si2 = _scale(i1, i2)
-
-        return float(f'{imgcompare.image_diff_percent(si1, si2) / 100:.2f}')
-    except Exception as e:
-        print(f'Error occurred: {e}')
+    return err
 
 
-if __name__ == '__main__':
-    _THRESHOLD = 0.6
-    im1 = sys.argv[1]
-    im2 = sys.argv[2]
+def sim(path1, path2):
+    i1 = Image.open(path1)
+    i2 = Image.open(path2)
 
-    val = 1 - _compare_images(im1, im2)
-    print(f'{val:.2} >= {_THRESHOLD} --> Suspicious' if val > _THRESHOLD else f'{val} < {_THRESHOLD} --> Not suspicious')
+    width, height = i1.size
+    i2 = i2.resize((width, height))
+    i2 = i2.convert(i1.mode)
+
+    return 1 - float(f'{imgcompare.image_diff_percent(i1, i2) / 100:.2f}')
+
+
+def scale(i1, i2):
+    height, width, _ = i1.shape
+    resized = cv2.resize(i2, (width, height), interpolation=cv2.INTER_AREA)
+
+    return i1, resized
+
+
+image1 = cv2.imread(sys.argv[1])
+image2 = cv2.imread(sys.argv[2])
+
+image1, image2 = scale(image1, image2)
+
+mse = mse(image1, image2)
+ssim = ssim(image1, image2, multichannel=True)
+sim = sim(sys.argv[1], sys.argv[2])
+
+print(f'MSE:\t{mse}\nSSIM:\t{ssim}\nSim:\t{sim}')
+# print(f'MSE:\t{mse}\t(the smaller the better)\nSSIM:\t{ssim}\t(the closer to 1 the better')

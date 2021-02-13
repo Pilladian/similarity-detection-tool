@@ -7,7 +7,7 @@ def run(file_pairs):
 
     for desc, file1, file2 in file_pairs:
         print(f'Test running: {desc}')
-        os.system(f'python3 image.py {file1} {file2}')
+        os.system(f'python3 compare_image.py {file1} {file2}')
         print()
 
 
