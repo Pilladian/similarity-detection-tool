@@ -23,7 +23,7 @@ def sim(path1, path2):
     i2 = i2.resize((width, height))
     i2 = i2.convert(i1.mode)
 
-    return 1 - float(f'{imgcompare.image_diff_percent(i1, i2) / 100:.2f}')
+    return 1 - float(imgcompare.image_diff_percent(i1, i2) / 100)
 
 
 def scale(i1, i2):
@@ -42,5 +42,6 @@ mse = mse(image1, image2)
 ssim = ssim(image1, image2, multichannel=True)
 sim = sim(sys.argv[1], sys.argv[2])
 
-print(f'MSE:\t{mse}\nSSIM:\t{ssim}\nSim:\t{sim}')
+print(f'MSE:\t{mse}\tsmall means suspicious\nSSIM:\t{ssim}\tclose to 1 means suspicious'
+      f'\nSim:\t{sim}\tclose to 1 means suspicious')
 # print(f'MSE:\t{mse}\t(the smaller the better)\nSSIM:\t{ssim}\t(the closer to 1 the better')
