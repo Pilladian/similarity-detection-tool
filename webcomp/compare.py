@@ -1,6 +1,5 @@
 # Python 3.8
 
-import sys
 import requests
 import copy
 import os
