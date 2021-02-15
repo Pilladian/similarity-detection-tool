@@ -25,8 +25,6 @@ Therefore, we implemented the following features
 - Images
     - use different metrics for comparing (MSE, SSIM, SIM)
     - `TODO` collect images and compare them
-    - `TODO` take screenshot of websites and compare them
-    - `TODO` combine `compare_image.py` and `compare_html.py`
     
 ## Typosquatting
 
