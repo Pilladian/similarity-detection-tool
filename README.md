@@ -23,8 +23,8 @@ Therefore, we implemented the following features
     - count word overlaps for them to calculate an average
     
 - Images
+    - create screenshot of both websites and compare them
     - use different metrics for comparing (MSE, SSIM, SIM)
-    - `TODO` collect images and compare them
     
 ## Typosquatting
 
