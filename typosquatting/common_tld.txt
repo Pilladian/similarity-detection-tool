@@ -1,0 +1,23 @@
+# most commen top-level domains
+.com
+.org
+.ru
+.net
+.de
+.com.br
+.ir
+.co.uk
+.pl
+.it
+.jp
+.uk
+.fr
+.nl
+.ca
+.au
+.es
+.ch
+.se
+.us
+.no
+.co

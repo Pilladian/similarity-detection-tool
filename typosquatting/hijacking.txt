@@ -1,8 +1,6 @@
 # rows of similar looking character
-I, l, J, j, 1
-p, q
-c, o
-m, n, w
-u, y
-P, F
-D, O, Q, C
+i,l,j,1
+p,q
+c,o
+m,n,w
+u,y
