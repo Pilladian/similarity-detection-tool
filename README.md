@@ -35,7 +35,7 @@ Furthermore, we wrote a script that is able to check if the website exists to pe
 
 ## Installation
 - clone repository
-- run `sudo ./requirements.sh` to install required packages
+- run `chmod +x requirements.sh && sudo ./requirements.sh` to install required packages
 - run `pip3 install -r requirements.txt` to install required python modules
 
 ## Usage
