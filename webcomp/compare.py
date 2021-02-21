@@ -376,6 +376,9 @@ if __name__ == '__main__':
                                                              _IU_TH=thiu
                                                              )
 
-    # output
+    # log output
     if _LOGGING:
         log(u1, u2, values, final_values, thresholds, SCREEN=_SCREEN)
+
+    # print output
+    print_content(u1, u2, values, final_values, thresholds, SCREEN=_SCREEN)
