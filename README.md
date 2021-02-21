@@ -33,4 +33,20 @@ This is a procedure where similar looking letters are swapped in the url to caus
 We also collected some use-cases where the victim miss clicks on the keyboard. 
 Furthermore, we wrote a script that is able to check if the website exists to perform a similarity check on them using the above described objectives.
 
+## Installation
+- clone repository
+- run `sudo ./requirements.sh` to install required packages
+- run `pip3 install -r requirements.txt` to install required python modules
+
+## Usage
+
+#### Command 
+`python3 <url> <url> [-l | --log] [-s | --screen]`
+
+#### Arguments
+url : common url of type http://example.com or https://sub.example.com:1234
+
+[ -l | --log ] : enables logging mode -> prints output and stores outcome to compare.log
+
+[ -s | --screen ] : enables image comparing, since this is only usable on desktop machines
 
