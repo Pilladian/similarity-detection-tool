@@ -1,4 +1,4 @@
-# most commen top-level domains
+# most common top-level domains
 .com
 .org
 .ru

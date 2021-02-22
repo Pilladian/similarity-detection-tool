@@ -5,15 +5,15 @@ import dns.resolver
 def search(domain):
     # if error -> no subdomain; else found subdomain with ip address/es
     try:
-        # dns looup for ipv4
-        result = dns.resolver.query(domain, "A")
+        # dns lookup for ipv4
+        result = dns.resolver.resolve(domain, "A")
     except:
         # if not found return false
         return False
     else:
         # if lookup workes return True
         return True
-
+lookup
 
 # generates for now just one typo
 def main(domain):
@@ -40,7 +40,7 @@ def main(domain):
             x = newline[i].find(characters_domain[n])
             # found one; -1 then none found
             if x >= 0:
-                # get the line and seperate the characters
+                # get the line and separate the characters
                 replace = newline[i]
                 replace = re.split(",", replace)
                 # go through the characters and find different then original; then replace and append to urls
@@ -65,7 +65,7 @@ def main(domain):
             x = newline[i].find(characters_domain[n])
             # found one; -1 then none found
             if x == 0:
-                # get the line and seperate the characters
+                # get the line and separate the characters
                 replace = newline[i]
                 replace = re.split(",", replace)
                 # go through the characters and find different then original; then replace and append to urls
@@ -86,7 +86,7 @@ def main(domain):
     newline = re.split("\n", read)
     newline.pop(0)
     
-    # check if original tld is in commen tlds
+    # check if original tld is in common tlds
     if read.find(tld) == -1:
         newline.append(tld)
     

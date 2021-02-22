@@ -1,14 +1,12 @@
 # Python 3.9
 import dns.resolver
 
-# ~30 min for 100000 without actuall dns requests
-# takes an awfully long amount of time to get subdomains; need to improve this
 def main(domain, extended_or_not):
-    dic = dictonary(domain, extended_or_not)
+    dic = dictionary(domain, extended_or_not)
     return dic
     
-# finds domains based on pregiven txt file
-def dictonary(domain, extended_or_not):
+# finds domains based on pre given txt file
+def dictionary(domain, extended_or_not):
     # open file and extract subdomains
     # for extended version take the bigger file, else just 1000 file
     if extended_or_not:
