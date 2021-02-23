@@ -1,37 +1,51 @@
-# Website Comparer
+# Similarity Detection
 
-In this project we created a tool for comparing websites based on different objectives.
-Therefore, we implemented the following features
+In this project we created a tool that is able to detect phishing websites. It
+takes a domain as input and now scans the internet for domains that look similar
+to the given one. For that we use a process that is called `Typosquatting`.
+If there really exist some of those websites the second component of the tool
+comes in, the `Website Comparison Tool`. Now the target website that was given
+is compared to the generated ones, found earlier. At the end the tool states a
+similarity score how suspicious the compared website is. With our tool companies
+can check for malicious websites, that try to impersonate them.
 
-## Features
+## Typosquatting
+`TODO: Sasha`
+
+## Website Comparison Tool
+Given two URLs the tool will look at different features of the websites trying
+to compare them. For each feature it calculates a similarity percentage which
+are then used to set a score for the specific feature. The sum of all feature
+scores is the final similarity score that states how suspicious a website looks
+like.
+
+
+### Features
 - Content
-    - removed HTML markup
-    - count line overlaps of both websites
-    
+    - remove HTML markup
+    - Similarity Percentage: line overlaps on both websites
+
 - Domain
     - remove common parts like [.de, .com, http, https, etc]
-    - count word overlaps of both domains
-    
-- Hrefs
-    - collect all hrefs in both websites
-    - loop through all hrefs to compare everyone to everyone
-    - count word overlaps for them to calculate an average
-  
+    - Similarity Percentage: word overlaps on both domains
+
+- Links
+    - collect all hrefs in both websites (html-tag: href)
+    - loop through all of them to compare everyone to everyone
+    - Similarity Percentage: average word overlaps
+
 - Image-URLs
-    - collect all image-links in both websites
+    - collect all image-links in both websites (html-tag: src)
     - loop through all links to compare everyone to everyone
-    - count word overlaps for them to calculate an average
-    
+    - Similarity Percentage: average word overlaps
+
 - Images
     - create screenshot of both websites and compare them
     - use different metrics for comparing (MSE, SSIM, SIM)
-    
-## Typosquatting
-
-To find cloned websites that are used for phishing, we also focused on typosquatting.
-This is a procedure where similar looking letters are swapped in the url to cause the victim to think everything is correct.
-We also collected some use-cases where the victim miss clicks on the keyboard. 
-Furthermore, we wrote a script that is able to check if the website exists to perform a similarity check on them using the above described objectives.
+      - ***MSE***: compare each pixel of the one image to the corresponding pixel
+          of the other image
+      - ***SSIM***: same as MSE but with bigger kernel size
+      - ***SIM***: take difference of both images in embedding space
 
 ## Installation
 - clone repository
@@ -40,13 +54,13 @@ Furthermore, we wrote a script that is able to check if the website exists to pe
 
 ## Usage
 
-#### Command 
-`python3 <url> <url> [-l | --log] [-s | --screen]`
+#### Command
+`python3 main.py <domain>`
+Note that the input must only be a domain name not the whole URL. That means that 
+you should use `google.com` instead of `https://google.com` 
 
-#### Arguments
-url : common url of type http://example.com or https://sub.example.com:1234
-
-[ -l | --log ] : enables logging mode -> prints output and stores outcome to compare.log
-
-[ -s | --screen ] : enables image comparing, since this is only usable on desktop machines
-
+### Output
+By default the tool will log the outcome of the comparing in the `logs` directory 
+in the specific domain directory. E.g. `logs/google.com`. With logging enabled it 
+will also create a `results.txt` containing all tested URLs and their similarity 
+scores.
