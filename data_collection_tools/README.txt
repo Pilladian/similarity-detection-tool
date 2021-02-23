@@ -1,1 +1,0 @@
-Package of all scripts which are used for data collection

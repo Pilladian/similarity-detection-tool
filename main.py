@@ -1,6 +1,6 @@
 # Python
 
-from typosquatting import Generator
+from typosquatting import URLGenerator
 from webcomp import Comparer
 
 import requests
@@ -8,8 +8,12 @@ import sys
 import os
 import os.path as path
 
+
 def _help():
-    pass
+    print()
+    print(f'Usage: python3 main.py <domain>')
+    print(f'The argument must be a domain. More precisely google.com instead of https://google.com')
+    exit(0)
 
 
 if __name__ == '__main__':
@@ -20,10 +24,13 @@ if __name__ == '__main__':
 
     # URLs
     target_domain = sys.argv[1]
-    target_url = requests.get(f'http://{target_domain}').url
+    try:
+        target_url = requests.get(f'http://{target_domain}').url
+    except Exception as e:
+        _help()
 
     # generate possible malicious domains
-    generator = Generator.Generator()
+    generator = URLGenerator.Generator()
     typo_domains = generator.generate(target_domain)
 
     # append protocol
