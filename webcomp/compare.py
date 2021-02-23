@@ -251,16 +251,6 @@ def calculate_final_similarity_scores(c, d, h, iu, sh, _C_TH, _D_TH, _H_TH, _IU_
     return scores
 
 
-def calculate_final_similarity_scores_min(c, d, h, iu, _C_TH, _D_TH, _H_TH, _IU_TH):
-    scores = [(_helper_calc(c, _C_TH, 2), 2.0),
-              (_helper_calc(d, _D_TH, 2), 2.0),
-              (_helper_calc(h, _H_TH, 3), 3.0),
-              (_helper_calc(iu, _IU_TH, 3), 3.0)
-              ]
-
-    return scores
-
-
 def _helper_calc(val, threshold, max_points, percentage=0.2):
     if val == 0.0:
         return 0.0

@@ -1,13 +1,12 @@
 # Python
 
-from typosquatting import gen_URL
-from webcomp import compare
+from typosquatting import Generator
+from webcomp import Comparer
 
 import requests
 import sys
 import os
 import os.path as path
-
 
 def _help():
     pass
@@ -24,7 +23,8 @@ if __name__ == '__main__':
     target_url = requests.get(f'http://{target_domain}').url
 
     # generate possible malicious domains
-    typo_domains = gen_URL.main(target_domain)
+    generator = Generator.Generator()
+    typo_domains = generator.generate(target_domain)
 
     # append protocol
     typo_urls = []
@@ -36,17 +36,29 @@ if __name__ == '__main__':
         except Exception as e:
             connection_error_log.append((domain, e))
 
-    # if not already exist: create directory logs
-    if not path.exists('logs'):
-        os.system('mkdir logs')
-
     # compare urls
     scores = []
-    for url in typo_urls:
-        print(f'Comparing: {target_url} with {url}')
-        scores.append((url, compare.main(target_url, url, _LOGGING=True)))
+    comparer = Comparer.Comparer()
+    _LOGGING = True
 
-    # print results into file: ./logs/results.txt
-    with open('./logs/results.txt', 'w') as result_file:
-        for url, score in scores:
-            result_file.write(f'[ Similarity Score ] {score} / 11.0\t[ URL ] {url}\n')
+    if _LOGGING:
+        # if not already exist: create directory logs
+        if not path.exists('logs'):
+            os.system('mkdir logs')
+
+        # if not already exist: create directory logs/<target_domain>
+        if not path.exists(f'logs/{target_domain}'):
+            os.system(f'mkdir logs/{target_domain}')
+
+    for url in typo_urls:
+        comparer.set_parameter(target_url, url)
+        if _LOGGING:
+            comparer.enable_logging(f'logs/{target_domain}/')
+        achieved_points, max_points = comparer.compare_websites()
+        print(f'{achieved_points} / {max_points} for comparing {target_url} with {url}')
+        scores.append((url, achieved_points, max_points))
+
+    # print results into file: ./logs/<target-domain>/results.txt
+    with open(f'logs/{target_domain}/results.txt', 'w') as result_file:
+        for url, score, max_score in scores:
+            result_file.write(f'{score} / {max_score} for [ {url} ]\n')
