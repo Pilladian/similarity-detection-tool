@@ -2,6 +2,7 @@
 import re
 import dns.resolver
 
+
 def search(domain):
     # if error -> no subdomain; else found subdomain with ip address/es
     try:
@@ -13,7 +14,7 @@ def search(domain):
     else:
         # if lookup workes return True
         return True
-lookup
+
 
 # generates for now just one typo
 def main(domain):

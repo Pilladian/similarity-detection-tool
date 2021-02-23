@@ -28,3 +28,5 @@ soupsieve==2.2
 tifffile==2020.9.3
 urllib3==1.26.3
 webencodings==0.5.1
+dnspython==2.1.0
+py3dns==3.2.1
