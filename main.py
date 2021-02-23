@@ -36,7 +36,7 @@ if __name__ == '__main__':
     # append protocol
     typo_urls = []
     connection_error_log = []
-    for domain in typo_domains[:2]:
+    for domain in typo_domains:
         try:
             r = requests.get(f'http://{domain}')
             typo_urls.append(r.url)
