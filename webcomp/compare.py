@@ -10,6 +10,7 @@ import sys
 from PIL import Image
 import imgcompare
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 import time
 from skimage.metrics import structural_similarity
 
@@ -20,7 +21,8 @@ def compare(url1, url2):
     _values = [compare_content(url1, url2),
                compare_domain(url1, url2),
                compare_hrefs(url1, url2),
-               compare_image_sources(url1, url2)
+               compare_image_sources(url1, url2),
+               compare_screenshot(url1, url2)
                ]
 
     return _values
@@ -121,9 +123,14 @@ def _get_image_urls(url):
     psb = w.content  # page source as bytes
     pss = psb.decode()  # page source as string
 
-    soup = BeautifulSoup(pss, features="html5lib")
-    img_list = [a['src'] for a in soup.find_all('img')]
-    img_list = [_get_domain_components(url) + _get_image_components(a) for a in img_list]
+    img_list = []
+
+    try:
+        soup = BeautifulSoup(pss, features="html5lib")
+        img_list = [a['src'] for a in soup.find_all('img')]
+        img_list = [_get_domain_components(url) + _get_image_components(a) for a in img_list]
+    except:
+        pass
 
     return img_list
 
@@ -157,14 +164,14 @@ def compare_screenshot(url1, url2):
 
 def _store_screenshots(urls):
     DRIVER = 'chromedriver'
-    driver = webdriver.Chrome(DRIVER)
-    driver.set_window_size(4096, 1024)
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    driver = webdriver.Chrome(DRIVER, chrome_options=chrome_options)
+    # driver.set_window_size(4096, 1024)
 
     for n, url in enumerate(urls):
         driver.get(url)
-        time.sleep(2)
         driver.save_screenshot(f'sh_website{n}.png')
-        time.sleep(2)
 
     driver.quit()
 
@@ -288,13 +295,13 @@ def print_content(url1, url2, value_list, score_list, threshold_list, SCREEN=Fal
     print(f'Final Similarity Score: {sum([a[0] for a in score_list])} / {"11.0" if SCREEN else "10.0"}\n')
 
 
-def log(url1, url2, value_list, score_list, threshold_list, SCREEN=False):
-    print_content(url1, url2, value_list, score_list, threshold_list, SCREEN)
-    testcases = ['Content', 'Domain', 'Hrefs', 'Image-Urls']
-    if SCREEN:
-        testcases.append('Screenshots')
+def log(url1, url2, value_list, score_list, threshold_list):
+    domain1 = '.'.join(_get_domain_components(url1))
+    domain2 = '.'.join(_get_domain_components(url2))
 
-    with open('./compare.log', 'w') as log_file:
+    testcases = ['Content', 'Domain', 'Hrefs', 'Image-Urls', 'Screenshots']
+
+    with open(f'./logs/{domain1}_{domain2}.log', 'w') as log_file:
         log_file.write(f'Check similarity for {url1} and {url2}\n\n')
         log_file.write('\tTest\t\t\tAchieved Score\t Similarity\t\tThreshold\n\n')
 
@@ -304,81 +311,36 @@ def log(url1, url2, value_list, score_list, threshold_list, SCREEN=False):
                            f'\t\t {value_list[ind]:.2f}'
                            f'{" " * (15 - len(str(threshold_list[ind])))}{threshold_list[ind]}\n')
 
-        log_file.write(f'\nFinal Similarity Score: {sum([a[0] for a in score_list])} / {"11.0" if SCREEN else "10.0"}')
+        log_file.write(f'\nFinal Similarity Score: {sum([a[0] for a in score_list])} / 11.0')
 
 
 # ------------------------------------------------------------------------------------------------ Main
-if __name__ == '__main__':
-    # variables
-    _LOGGING = False
-    _SCREEN = False
-    _PATH = './'
-
-    # command line arguments
-    args = []
-    for i, arg in enumerate(sys.argv[1:]):
-        args.append(arg)
-
-    # Logging
-    if len(args) == 3 and args[2].lower() in ['-l', '--log']:
-        _LOGGING = True
-    elif len(args) == 3 and args[2].lower() in ['-s', '--screen']:
-        _SCREEN = True
-    elif len(args) == 4:
-        if args[2].lower() in ['-l', '--log'] or args[3].lower() in ['-l', '--log']:
-            _LOGGING = True
-        if args[2].lower() in ['-s', '--screen'] or args[3].lower() in ['-s', '--screen']:
-            _SCREEN = True
-
-    # URLs
-    u1 = args[0]
-    u2 = args[1]
-
+def main(url1, url2, _LOGGING=False):
     # Values received from testcases
-    values = compare(u1, u2)
+    values = compare(url1, url2)
 
     # extract scores
-    content, domain, hrefs, img_urls = values
+    content, domain, hrefs, img_urls, screenshots = values
 
     # set thresholds
-    thc, thd, thh, thiu = 0.25, 0.66, 0.02, 0.05
-    thresholds = [thc, thd, thh, thiu]
+    thc, thd, thh, thiu, thsh = 0.25, 0.66, 0.02, 0.05, 0.66
+    thresholds = [thc, thd, thh, thiu, thsh]
 
-    # if -s | --screen
-    if _SCREEN:
-        screenshots = compare_screenshot(u1, u2)
-        values = (content, domain, hrefs, img_urls, screenshots)
-        thsh = 0.66
-        thresholds.append(thsh)
-
-        # calculate final similarity scores
-        final_values = calculate_final_similarity_scores(content,
-                                                         domain,
-                                                         hrefs,
-                                                         img_urls,
-                                                         screenshots,
-                                                         _C_TH=thc,
-                                                         _D_TH=thd,
-                                                         _H_TH=thh,
-                                                         _IU_TH=thiu,
-                                                         _SH_TH=thsh
-                                                         )
-
-    else:
-        # calculate final similarity scores
-        final_values = calculate_final_similarity_scores_min(content,
-                                                             domain,
-                                                             hrefs,
-                                                             img_urls,
-                                                             _C_TH=thc,
-                                                             _D_TH=thd,
-                                                             _H_TH=thh,
-                                                             _IU_TH=thiu
-                                                             )
+    # calculate final similarity scores
+    final_values = calculate_final_similarity_scores(content,
+                                                     domain,
+                                                     hrefs,
+                                                     img_urls,
+                                                     screenshots,
+                                                     _C_TH=thc,
+                                                     _D_TH=thd,
+                                                     _H_TH=thh,
+                                                     _IU_TH=thiu,
+                                                     _SH_TH=thsh
+                                                     )
 
     # log output
     if _LOGGING:
-        log(u1, u2, values, final_values, thresholds, SCREEN=_SCREEN)
+        log(url1, url2, values, final_values, thresholds)
 
-    # print output
-    print_content(u1, u2, values, final_values, thresholds, SCREEN=_SCREEN)
+    return sum([a[0] for a in final_values])

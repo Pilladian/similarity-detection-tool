@@ -15,7 +15,6 @@ networkx==2.5
 numpy==1.19.5
 opencv-python==4.5.1.48
 Pillow==8.1.0
-pkg-resources==0.0.0
 pyparsing==2.4.7
 python-dateutil==2.8.1
 PyWavelets==1.1.1

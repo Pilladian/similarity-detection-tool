@@ -29,7 +29,7 @@ def main(domain):
     
     # generate domains with hijacking.txt:
     # open file hijacking.txt
-    hijacking = open("hijacking.txt", "r")
+    hijacking = open("typosquatting/hijacking.txt", "r")
     read = hijacking.read()
     # split the file by new lines and get rude of first line with the comment
     newline = re.split("\n", read)
@@ -54,7 +54,7 @@ def main(domain):
                         
     # generate domains with miss_click.txt:
     # open file miss_click.txt
-    miss_click = open("miss_click.txt", "r")
+    miss_click = open("typosquatting/miss_click.txt", "r")
     read = miss_click.read()
     # split the file by new lines and get rude of first line with the comment
     newline = re.split("\n", read)
@@ -81,7 +81,7 @@ def main(domain):
     urls_with_tld = []
     
     # open file common_tld.txt
-    common_tld = open("common_tld.txt", "r")
+    common_tld = open("typosquatting/common_tld.txt", "r")
     read = common_tld.read()
     # split the file by new lines and get rude of first line with the comment
     newline = re.split("\n", read)
