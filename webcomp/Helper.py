@@ -19,7 +19,7 @@ import os
 def crawl_website(url):
     w = requests.get(url)           # website html
     psb = w.content                 # page source as bytes
-    pss = psb.decode()              # page source as string
+    pss = decode(psb)               # page source as string
     psl = pss.split('\n')           # list of all lines split by '\n'
     ps_rhtml = remove_html(psl)     # html markup removed
     return ps_rhtml
@@ -92,7 +92,7 @@ def get_percentage_similarity(l1, l2):
 def get_hrefs(url):
     w = requests.get(url)   # website html
     psb = w.content         # page source as bytes
-    pss = psb.decode()      # page source as string
+    pss = decode(psb)  # page source as string
 
     soup = BeautifulSoup(pss, features="html5lib")
 
@@ -102,7 +102,7 @@ def get_hrefs(url):
 def get_image_urls(url):
     w = requests.get(url)   # website html
     psb = w.content         # page source as bytes
-    pss = psb.decode()      # page source as string
+    pss = decode(psb)  # page source as string
 
     img_list = []
 
@@ -167,3 +167,12 @@ def calculate_points(percentage, threshold, max_points, percentage_steps=0.2):
         rounds += 1
 
     return 0.0
+
+
+def decode(cont):
+    try:
+        pss = cont.decode()  # page source as string
+    except:
+        pss = cont.decode(encoding='ISO-8859-1')
+
+    return pss
