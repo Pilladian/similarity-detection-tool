@@ -17,12 +17,15 @@ import os
 
 
 def crawl_website(url):
-    w = requests.get(url)           # website html
-    psb = w.content                 # page source as bytes
-    pss = decode(psb)               # page source as string
-    psl = pss.split('\n')           # list of all lines split by '\n'
-    ps_rhtml = remove_html(psl)     # html markup removed
-    return ps_rhtml
+    try:
+        w = requests.get(url)           # website html
+        psb = w.content                 # page source as bytes
+        pss = decode(psb)               # page source as string
+        psl = pss.split('\n')           # list of all lines split by '\n'
+        ps_rhtml = remove_html(psl)     # html markup removed
+        return ps_rhtml
+    except:
+        return []
 
 
 def remove_html(lines):
@@ -90,22 +93,27 @@ def get_percentage_similarity(l1, l2):
 
 
 def get_hrefs(url):
-    w = requests.get(url)   # website html
-    psb = w.content         # page source as bytes
-    pss = decode(psb)  # page source as string
+    try:
+        w = requests.get(url)   # website html
+        psb = w.content         # page source as bytes
+        pss = decode(psb)  # page source as string
 
-    soup = BeautifulSoup(pss, features="html5lib")
+        soup = BeautifulSoup(pss, features="html5lib")
 
-    return [a['href'] for a in soup.find_all('a', href=True)]
+        return [a['href'] for a in soup.find_all('a', href=True)]
+    except:
+        return []
 
 
 def get_image_urls(url):
-    w = requests.get(url)   # website html
-    psb = w.content         # page source as bytes
-    pss = decode(psb)  # page source as string
+    try:
+        w = requests.get(url)   # website html
+        psb = w.content         # page source as bytes
+        pss = decode(psb)  # page source as string
+    except:
+        return []
 
     img_list = []
-
     try:
         soup = BeautifulSoup(pss, features="html5lib")
         img_list = [a['src'] for a in soup.find_all('img')]

@@ -76,9 +76,9 @@ def _calculate_points(content,   domains,   links,     img_sources, screen,
     # contains tuple (achieved_points, max_points)
     points = [(Helper.calculate_points(content,     TH_C, 2), 2.0),
               (Helper.calculate_points(domains,     TH_D, 2), 2.0),
-              (Helper.calculate_points(links,       TH_L, 3), 2.0),
-              (Helper.calculate_points(img_sources, TH_I, 3), 3.0),
-              (Helper.calculate_points(screen,      TH_S, 1), 1.0)
+              (Helper.calculate_points(links,       TH_L, 2), 2.0),
+              (Helper.calculate_points(img_sources, TH_I, 2), 2.0),
+              (Helper.calculate_points(screen,      TH_S, 2), 2.0)
               ]
 
     return points
