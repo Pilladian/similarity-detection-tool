@@ -27,3 +27,19 @@ Method: `compare_websites(self)`
   - image sources
   - website screenshots
 - calculates final similarity score
+
+Function: `_compare_content(url1, url2)`
+- returns similarity percentage for content
+
+Function: `_compare_domains(url1, url2)`
+- returns similarity percentage for domains
+
+Function: `_compare_links(url1, url2)`
+- returns similarity percentage for links
+
+Function: `_compare_image_sources(url1, url2)`
+- returns average similarity percentage for content
+
+Function: `_compare_screenshots(url1, url2)`
+- uses three different measurements for difference / similarity
+- returns average similarity percentage for content
