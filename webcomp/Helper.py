@@ -23,7 +23,12 @@ def crawl_website(url):
         pss = decode(psb)               # page source as string
         psl = pss.split('\n')           # list of all lines split by '\n'
         ps_rhtml = remove_html(psl)     # html markup removed
-        return ps_rhtml
+        ps = []
+        for xline in ps_rhtml:
+            line = ''.join(xline.split('\t'))
+            if line != '':
+                ps.append(line)
+        return ps
     except:
         return []
 
@@ -60,11 +65,6 @@ def remove_html(lines):
 def get_domain_components(url):
     cs = url.split('https://')
     cs = ''.join(cs).split('http://')
-    cs = ''.join(cs).split('www.')
-    cs = ''.join(cs).split('.de')
-    cs = ''.join(cs).split('.com')
-    cs = ''.join(cs).split('.org')
-    cs = ''.join(cs).split('.to')
     cs = ''.join(cs).split('#')[0]
     cs = ''.join(cs).split('/')[0]
     cs = ''.join(cs).split('.')
@@ -72,18 +72,18 @@ def get_domain_components(url):
 
 
 def get_domain(url):
-    print(url)
     cs = url.split('https://')
     cs = ''.join(cs).split('http://')
     cs = ''.join(cs).split('#')[0]
     cs = ''.join(cs).split('/')[0]
-    print(cs)
     return cs
 
 
 def get_image_components(url):
-    ol = url.split('/')
-    nl = [a for a in ol if a != '']
+    ol = url.split('https://')
+    ol = ''.join(ol).split('http://')
+    ol = ''.join(ol).split('/')
+    nl = [a for a in ol if a not in ['', 'wp-content', 'uploads']]
     return nl
 
 
@@ -127,7 +127,7 @@ def get_image_urls(url):
     try:
         soup = BeautifulSoup(pss, features="html5lib")
         img_list = [a['src'] for a in soup.find_all('img')]
-        img_list = [get_domain_components(url) + get_image_components(a) for a in img_list]
+        img_list = [get_image_components(a) for a in img_list]
     except Exception as error:
         os.system(f'echo {error} > /dev/null')
 
@@ -150,7 +150,6 @@ def create_screenshots(urls):
 def mse(img1, img2):
     err = np.sum((img1.astype('float') - img2.astype('float')) ** 2)
     err /= float(img1.shape[0] * img2.shape[1])
-
     return err
 
 

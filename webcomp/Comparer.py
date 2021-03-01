@@ -33,14 +33,13 @@ def _compare_image_sources(url1, url2):
     image_l1 = Helper.get_image_urls(url1)
     image_l2 = Helper.get_image_urls(url2)
 
-    va = 0.0
+    va = []
     for a in image_l1:
         for b in image_l2:
-            va += Helper.get_percentage_similarity(a, b)
+            va.append(Helper.get_percentage_similarity(a, b))
 
     try:
-        print(image_l1, image_l2)
-        return va / (len(image_l1) * len(image_l2))
+        return sum(va) / len(va)
     except ZeroDivisionError:
         return 0.0
 
@@ -59,11 +58,11 @@ def _compare_screenshots(url1, url2):
 
     value = 0.0
 
-    if mse < 5000:
+    if mse < 4000:
         value += 0.33
     if ssim > 0.85:
         value += 0.33
-    if sim > 0.96:
+    if sim > 0.97:
         value += 0.33
 
     # delete created screenshots
@@ -72,14 +71,14 @@ def _compare_screenshots(url1, url2):
 
 
 def _calculate_points(content,   domains,   links,     img_sources, screen,
-                      TH_C=0.25, TH_D=0.66, TH_L=0.02, TH_I=0.05,   TH_S=0.66):
+                      TH_C=0.25, TH_D=0.66, TH_L=0.02, TH_I=0.05,   TH_S=0.99):
 
     # contains tuple (achieved_points, max_points)
     points = [(Helper.calculate_points(content,     TH_C, 2), 2.0),
               (Helper.calculate_points(domains,     TH_D, 2), 2.0),
               (Helper.calculate_points(links,       TH_L, 2), 2.0),
               (Helper.calculate_points(img_sources, TH_I, 2), 2.0),
-              (Helper.calculate_points(screen,      TH_S, 2), 2.0)
+              (Helper.calculate_points(screen,      TH_S, 2, percentage_steps=0.33), 2.0)
               ]
 
     return points
@@ -145,7 +144,7 @@ class Comparer:
         th_domains = 0.66
         th_links = 0.02
         th_img_sources = 0.05
-        th_screen = 0.66
+        th_screen = 0.99
 
         # calculate points based on percentages
         similarity_points = _calculate_points(similarity_percentage_content,
