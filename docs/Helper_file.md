@@ -1,4 +1,4 @@
-# Helper.py
+# webcomp/Helper.py
 
 Function: `crawl_website(url)`
 - crawls given url
