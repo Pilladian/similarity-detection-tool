@@ -72,6 +72,6 @@ The tool is split into three parts. First we have the Typosquatting that generat
 new domains. Second there is the Website Comparison that compares the generated
 domains with the given one. The `main.py` combines both parts.
 Documentation:
-  - [Main](https://github.com/Pilladian/similarity-detection-tool/blob/main/main.py)
+  - [Main](https://github.com/Pilladian/similarity-detection-tool/blob/main/docs/main_file.md)
   - Typosquatting `TODO: Sasha`
-  - [Website Comparison](https://github.com/Pilladian/similarity-detection-tool/blob/main/webcomp/Comparer.py)
+  - [Website Comparison](https://github.com/Pilladian/similarity-detection-tool/blob/main/docs/Comparer_Class.md)
