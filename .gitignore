@@ -5,3 +5,5 @@ bin/
 lib/
 pyvenv.cfg
 share/
+logs/
+sh_website*
