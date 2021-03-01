@@ -49,8 +49,10 @@ like.
 
 ## Installation
 - clone repository
-- run `chmod +x requirements.sh && sudo ./requirements.sh` to install required packages
-- run `pip3 install -r requirements.txt` to install required python modules
+- run `virtualenv -p python3 similarity-detection-tool` to create the virtual environment
+- run `cd similarity-detection-tool && source bin/activate` to attach to the virtualenv
+- run `chmod +x requirements/requirements.sh && sudo requirements/requirements.sh` to install required packages
+- run `pip3 install -r requirements/requirements.txt` to install required python modules
 
 ## Usage
 
