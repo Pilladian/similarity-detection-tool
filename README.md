@@ -58,11 +58,20 @@ like.
 
 #### Command
 `python3 main.py <domain>`
-Note that the input must only be a domain name not the whole URL. That means that 
-you should use `google.com` instead of `https://google.com` 
+Note that the input must only be a domain name not the whole URL. That means that
+you should use `google.com` instead of `https://google.com`
 
 ### Output
-By default the tool will log the outcome of the comparing in the `logs` directory 
-in the specific domain directory. E.g. `logs/google.com`. With logging enabled it 
-will also create a `results.txt` containing all tested URLs and their similarity 
+By default the tool will log the outcome of the comparing in the `logs` directory
+in the specific domain directory. E.g. `logs/google.com`. With logging enabled it
+will also create a `results.txt` containing all tested URLs and their similarity
 scores.
+
+## Documentation
+The tool is split into three parts. First we have the Typosquatting that generates
+new domains. Second there is the Website Comparison that compares the generated
+domains with the given one. The `main.py` combines both parts.
+Documentation:
+  - [Main](uses three different measurements for difference / similarity)
+  - Typosquatting `TODO: Sasha`
+  - [Website Comparison](uses three different measurements for difference / similarity)
