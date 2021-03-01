@@ -1,4 +1,4 @@
-# Python
+# Python 3.7
 
 import os
 import cv2
