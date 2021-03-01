@@ -71,6 +71,16 @@ def get_domain_components(url):
     return cs
 
 
+def get_domain(url):
+    print(url)
+    cs = url.split('https://')
+    cs = ''.join(cs).split('http://')
+    cs = ''.join(cs).split('#')[0]
+    cs = ''.join(cs).split('/')[0]
+    print(cs)
+    return cs
+
+
 def get_image_components(url):
     ol = url.split('/')
     nl = [a for a in ol if a != '']

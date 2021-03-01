@@ -39,6 +39,7 @@ def _compare_image_sources(url1, url2):
             va += Helper.get_percentage_similarity(a, b)
 
     try:
+        print(image_l1, image_l2)
         return va / (len(image_l1) * len(image_l2))
     except ZeroDivisionError:
         return 0.0
@@ -104,23 +105,23 @@ class Comparer:
 
     def set_parameter(self, url1, url2):
         self.url1 = url1
-        self.domain1 = '.'.join(Helper.get_domain_components(url1))
+        self.domain1 = Helper.get_domain(url1)
         self.url2 = url2
-        self.domain2 = '.'.join(Helper.get_domain_components(url2))
+        self.domain2 = Helper.get_domain(url2)
 
     def log(self, similarity_values, similarity_points, thresholds):
         testcases = ['Content', 'Domain', 'Links', 'Image-Urls', 'Screenshots']
         with open(f'{self.path}{self.domain2}.log', 'w') as log_file:
             log_file.write(f'Check similarity for {self.url1} and {self.url2}\n\n')
-            log_file.write('\tTest\t\t\tAchieved Score\t Similarity\t\tThreshold\n\n')
+            log_file.write('\tTest\t\t\tAchieved Score\t Similarity\tThreshold\n\n')
 
             for ind in range(len(testcases)):
-                log_file.write(f'\t{testcases[ind]}'
+                log_file.write(f'\t\t{testcases[ind]}'
                                f'{" " * (15 - len(testcases[ind]))}\t{similarity_points[ind][0]} / {similarity_points[ind][1]}'
                                f'\t\t {similarity_values[ind]:.2f}'
                                f'{" " * (15 - len(str(thresholds[ind])))}{thresholds[ind]}\n')
 
-            log_file.write(f'\nFinal Similarity Score: {sum([a[0] for a in similarity_points])} / {sum([a[1] for a in similarity_points])}')
+            log_file.write(f'\nFinal Similarity Score: {sum([a[0] for a in similarity_points])} / {sum([a[1] for a in similarity_points])}\n')
 
     def compare_websites(self):
 
