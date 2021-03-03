@@ -3,7 +3,6 @@
 import os
 import cv2
 from skimage.metrics import structural_similarity
-from webcomp import Helper
 import os
 import os.path as path
 
@@ -32,6 +31,9 @@ def _compare_links(url1, url2):
 def _compare_image_sources(url1, url2):
     image_l1 = Helper.get_image_urls(url1)
     image_l2 = Helper.get_image_urls(url2)
+
+    #print(image_l1)
+    #print(image_l2)
 
     va = []
     for a in image_l1:
@@ -101,6 +103,7 @@ class Comparer:
     def enable_logging(self, p):
         self.path = p
         self._LOGGING = True
+        return f'{self.path}{self.domain2}.log'
 
     def set_parameter(self, url1, url2):
         self.url1 = url1
@@ -110,17 +113,27 @@ class Comparer:
 
     def log(self, similarity_values, similarity_points, thresholds):
         testcases = ['Content', 'Domain', 'Links', 'Image-Urls', 'Screenshots']
+#        with open(f'{self.path}{self.domain2}.log', 'w') as log_file:
+#            log_file.write(f'Check similarity for {self.url1} and {self.url2}\n\n')
+#            log_file.write('\tTest\t\t\tAchieved Score\t Similarity\tThreshold\n\n')
+#
+#            for ind in range(len(testcases)):
+#                log_file.write(f'\t\t{testcases[ind]}'
+#                               f'{" " * (15 - len(testcases[ind]))}\t{similarity_points[ind][0]} / {similarity_points[ind][1]}'
+#                               f'\t\t {similarity_values[ind]:.2f}'
+#                               f'{" " * (15 - len(str(thresholds[ind])))}{thresholds[ind]}\n')
+#
+#            log_file.write(f'\nFinal Similarity Score: {sum([a[0] for a in similarity_points])} / {sum([a[1] for a in similarity_points])}\n')
+
         with open(f'{self.path}{self.domain2}.log', 'w') as log_file:
-            log_file.write(f'Check similarity for {self.url1} and {self.url2}\n\n')
-            log_file.write('\tTest\t\t\tAchieved Score\t Similarity\tThreshold\n\n')
-
+            log_file.write('{')
+            log_file.write(f'url1:{self.url1}, ')
+            log_file.write(f'url2:{self.url2}, ')
             for ind in range(len(testcases)):
-                log_file.write(f'\t\t{testcases[ind]}'
-                               f'{" " * (15 - len(testcases[ind]))}\t{similarity_points[ind][0]} / {similarity_points[ind][1]}'
-                               f'\t\t {similarity_values[ind]:.2f}'
-                               f'{" " * (15 - len(str(thresholds[ind])))}{thresholds[ind]}\n')
-
-            log_file.write(f'\nFinal Similarity Score: {sum([a[0] for a in similarity_points])} / {sum([a[1] for a in similarity_points])}\n')
+                log_file.write(f'{testcases[ind]}:({similarity_points[ind][0]}, {similarity_points[ind][1]}, {similarity_values[ind]}, {thresholds[ind]})')
+                if ind != len(testcases) - 1:
+                    log_file.write(', ')
+            log_file.write('}')
 
     def compare_websites(self):
 
@@ -176,3 +189,8 @@ class Comparer:
 
         # return achieved similarity points, max. similarity points
         return sum([a[0] for a in similarity_points]), sum([a[1] for a in similarity_points])
+
+try:
+    from webcomp import Helper
+except ModuleNotFoundError:
+    import Helper

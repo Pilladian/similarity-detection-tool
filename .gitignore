@@ -7,3 +7,5 @@ pyvenv.cfg
 share/
 logs/
 sh_website*
+.ipynb_checkpoints/
+etc/
