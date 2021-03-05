@@ -99,8 +99,10 @@ def get_percentage_similarity(l1, l2):
         if element in l1:
             same2 += 1
 
-    return float((same1 + same2) / (len(l1) + len(l2)))
-
+    try:
+        return float((same1 + same2) / (len(l1) + len(l2)))
+    except ZeroDivisionError:
+        return 0.0
 
 def get_hrefs(url):
     try:
@@ -109,9 +111,18 @@ def get_hrefs(url):
         pss = decode(psb)  # page source as string
 
         soup = BeautifulSoup(pss, features="html5lib")
+        hrefs = [a['href'] for a in soup.find_all('a', href=True)]
+        links = []
+        for a in soup.find_all('link', href=True):
+            if isinstance(a['href'], list):
+                for el in a['href']:
+                    links.append(el)
+            else:
+                links.append(a['href'])
+        return hrefs + links
 
-        return [a['href'] for a in soup.find_all('a', href=True)]
-    except:
+    except Exception as e:
+        print(e)
         return []
 
 
@@ -128,6 +139,7 @@ def get_image_urls(url):
         soup = BeautifulSoup(pss, features="html5lib")
         img_list = [a['src'] for a in soup.find_all('img')]
         img_list = [get_image_components(a) for a in img_list]
+
     except Exception as error:
         os.system(f'echo {error} > /dev/null')
 

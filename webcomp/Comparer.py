@@ -33,9 +33,6 @@ def _compare_image_sources(url1, url2):
     image_l1 = Helper.get_image_urls(url1)
     image_l2 = Helper.get_image_urls(url2)
 
-    #print(image_l1)
-    #print(image_l2)
-
     va = []
     for a in image_l1:
         for b in image_l2:
