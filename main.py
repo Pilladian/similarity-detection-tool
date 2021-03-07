@@ -31,8 +31,8 @@ if __name__ == '__main__':
 
     # generate possible malicious domains
     generator = URLGenerator.Generator()
-    typo_domains = generator.generate(target_domain)
-
+    typo_domains = generator.generate(target_domain, 1)
+    
     # append protocol
     typo_urls = []
     connection_error_log = []
