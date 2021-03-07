@@ -8,9 +8,11 @@ class Generator:
     def __init__(self):
         self.path = 'typosquatting/'
 
-    @staticmethod
-    def _search(domain):
-        # if error -> no subdomain; else found subdomain with ip address/es
+    def search(self, domain):
+        '''
+        finds for a given domain if a dns lookup is successful
+        '''
+        # if error -> no domain; else found subdomain with ip address/es
         try:
             # dns lookup for ipv4
             result = dns.resolver.resolve(domain, "A")
@@ -21,89 +23,104 @@ class Generator:
             # if lookup works return True
             return True
 
-    def generate(self, domain):
+    def generator(self, flag_a, flag_b, characters_domain, data, iteration, next):
+        '''
+        flag_a: set when finding a character in the entire line
+        flag_b: set when only the first character from the data line is needed
+        character_domain: domain where character should be exchanged
+        data: the data with what it should be changed
+        iteration: either select how many iteration the function should do or -1 for as many as possible
+        next: at what point the character_domain should start replacing the characters with the data
+        '''
+        if (flag_a == 0 and flag_b == 0) or (flag_a == 1 and flag_b == 1):
+            raise Exception("No flag or both in generator() are set. Need to set flags correctly. See generator.__doc__ for more info.")
+        
+        urls = []
+        # go into the characters from the given domain and check against the data lines
+        for n in range(next, len(characters_domain)):
+            for i in range(0, len(data)):
+                x = data[i].find(characters_domain[n])
+                # found one; -1 then none found
+                if (flag_a and x >= 0) or (flag_b and x == 0):
+                    # get the line from the data and separate the characters
+                    replace = data[i]
+                    replace = re.split(",", replace)
+                    # go through the characters and find different then original; then replace and append to urls
+                    for g in range(0, len(replace)):
+                        if replace[g] != characters_domain[n]:
+                            temp_list = characters_domain.copy()
+                            temp_list[n] = replace[g]
+                            temp_url = []
+                            if iteration > 0:
+                                temp_url = generator(flag_a, flag_b, temp_list, data, iteration-1, n+1)
+                            elif iteration  == -1:
+                                iteration = len(temp_list) - n
+                                temp_url = generator(flag_a, flag_b, temp_list, data, iteration, n+1)
+                            temp_list = [''.join(temp_list[::])]
+                            urls.extend(temp_list)
+                            urls.extend(temp_url)
+        return urls
+    
+    def open_file(self, file_name):
+        '''
+        opens the file; deletes the first line for the comment; separates the file by newlines
+        '''
+        # open file_name
+        hijacking = open(f'{self.path}'+file_name, "r")
+        read = hijacking.read()
+        # split the file by new lines and get rude of first line with the comment
+        newline = re.split("\n", read)
+        newline.pop(0)
+        
+        return newline
+
+    def generate(self, domain, typo_mistakes):
+        '''
+        given a domain finds typosquatting domains or similar looking domains via a dns lookup
+        domain: full domain with tld e.g. example.com
+        typo_mistakes: for how many mistakes it should generate domains
+        '''
         # remove tld and extract characters
         domain_split = re.split("\.", domain)
         domainWithoutTLD = domain_split.pop(0)
         tld = "." + domain_split[0]
         characters_domain = list(domainWithoutTLD)
-
-        # save to this list all typosquatting domains
-        urls = []
-
-        # generate domains with hijacking.txt:
-        # open file hijacking.txt
-        hijacking = open(f'{self.path}hijacking.txt', "r")
-        read = hijacking.read()
-        # split the file by new lines and get rude of first line with the comment
-        newline = re.split("\n", read)
-        newline.pop(0)
-
-        # go into the characters from the domain and check against the hijacking lines & find in the line one character
-        for n in range(0, len(characters_domain)):
-            for i in range(0, len(newline)):
-                x = newline[i].find(characters_domain[n])
-                # found one; -1 then none found
-                if x >= 0:
-                    # get the line and separate the characters
-                    replace = newline[i]
-                    replace = re.split(",", replace)
-                    # go through the characters and find different then original; then replace and append to urls
-                    for g in range(0, len(replace)):
-                        if replace[g] != characters_domain[n]:
-                            temp_list = characters_domain.copy()
-                            temp_list[n] = replace[g]
-                            temp_list = [''.join(temp_list[::])]
-                            urls.append(temp_list)
-
-        # generate domains with miss_click.txt:
-        # open file miss_click.txt
-        miss_click = open(f'{self.path}miss_click.txt', "r")
-        read = miss_click.read()
-        # split the file by new lines and get rude of first line with the comment
-        newline = re.split("\n", read)
-        newline.pop(0)
-
-        # go into the characters from the domain and check against the hijacking lines & find in the line one character
-        for n in range(0, len(characters_domain)):
-            for i in range(0, len(newline)):
-                x = newline[i].find(characters_domain[n])
-                # found one; -1 then none found
-                if x == 0:
-                    # get the line and separate the characters
-                    replace = newline[i]
-                    replace = re.split(",", replace)
-                    # go through the characters and find different then original; then replace and append to urls
-                    for g in range(0, len(replace)):
-                        if replace[g] != characters_domain[n]:
-                            temp_list = characters_domain.copy()
-                            temp_list[n] = replace[g]
-                            temp_list = [''.join(temp_list[::])]
-                            urls.append(temp_list)
-
-        # generate with all the tlds and generated urls full urls
+        #-----------------------------------------------------------------------------
+        # generate second-level domain with similar.txt:
+        data_hijacking = self.open_file('similar.txt')
+        final_urls = self.generator(True, False, characters_domain, data_hijacking, -1, 0)
+        
+        #-----------------------------------------------------------------------------
+        # generate second-level domain with typo.txt:
+        data_miss_click = self.open_file('typo.txt')
+        temp_url = self.generator(False, True, characters_domain, data_miss_click, typo_mistakes-1, 0)
+        final_urls.extend(temp_url)
+        
+        #------------------------------------------------------------------------------
+        # generate with all the tlds and second-level domain full urls
         urls_with_tld = []
 
         # open file common_tld.txt
         common_tld = open(f'{self.path}common_tld.txt', "r")
         read = common_tld.read()
         # split the file by new lines and get rude of first line with the comment
-        newline = re.split("\n", read)
-        newline.pop(0)
-
-        # check if original tld is in common top level domains
+        data_tld = re.split("\n", read)
+        data_tld.pop(0)
+      
+        # check if original tld is in data_tld
         if read.find(tld) == -1:
-            newline.append(tld)
-
-        # generate the domains
-        for domains in urls:
-            for tld in newline:
-                urls_with_tld.append(domains[0] + tld)
-
-        # check if the domain exists
+            data_tld.extend(tld)
+        
+        # generate the url
+        for domains in final_urls:
+            for tld in data_tld:
+                urls_with_tld.append(domains + tld)
+                
+        # check if the url exists
         actual_domains = []
+        
         for domain in urls_with_tld:
-            if self._search(domain):
+            if self.search(domain):
                 actual_domains.append(domain)
-
+        
         return actual_domains

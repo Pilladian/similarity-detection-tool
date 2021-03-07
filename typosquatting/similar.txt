@@ -1,6 +1,6 @@
 # rows of similar looking character
 i,l,j,1
-p,q
+p,q,g
 c,o
 m,n,w
-u,y
+u,v,y
