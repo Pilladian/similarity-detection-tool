@@ -16,6 +16,9 @@ from skimage.metrics import structural_similarity
 import os
 
 
+def print_error(e, fn):
+    print(f'Error occured in {fn} : {e}\n')
+
 def crawl_website(url):
     try:
         w = requests.get(url)           # website html
@@ -29,7 +32,8 @@ def crawl_website(url):
             if line != '':
                 ps.append(line)
         return ps
-    except:
+    except Exception as e:
+        print_error(e, 'crawl_website')
         return []
 
 
@@ -102,6 +106,7 @@ def get_percentage_similarity(l1, l2):
     try:
         return float((same1 + same2) / (len(l1) + len(l2)))
     except ZeroDivisionError:
+        print_error(e, 'get_percentage_similarity')
         return 0.0
 
 def get_hrefs(url):
@@ -122,7 +127,7 @@ def get_hrefs(url):
         return hrefs + links
 
     except Exception as e:
-        print(e)
+        print_error(e, 'get_hrefs')
         return []
 
 
@@ -141,7 +146,7 @@ def get_image_urls(url):
         img_list = [get_image_components(a) for a in img_list]
 
     except Exception as error:
-        os.system(f'echo {error} > /dev/null')
+        print_error(e, 'get_image_urls')
 
     return img_list
 
