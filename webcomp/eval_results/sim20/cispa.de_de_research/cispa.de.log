@@ -1,0 +1,36 @@
+{
+     "url1": "https://cispa.de/de/research",
+     "url2": "cispa.de/de/research/publications",
+     "stats": {
+          "Content": {
+               "sim_points": 2.0,
+               "max_sim_points": 2.0,
+               "sim_value": 0.5036697247706422,
+               "threshold": 0.25
+          },
+          "Domain": {
+               "sim_points": 2.0,
+               "max_sim_points": 2.0,
+               "sim_value": 1.0,
+               "threshold": 0.66
+          },
+          "Links": {
+               "sim_points": 2.0,
+               "max_sim_points": 2.0,
+               "sim_value": 0.71900826446281,
+               "threshold": 0.02
+          },
+          "Image-Urls": {
+               "sim_points": 2.0,
+               "max_sim_points": 2.0,
+               "sim_value": 0.07627118644067797,
+               "threshold": 0.05
+          },
+          "Screenshots": {
+               "sim_points": 1.0,
+               "max_sim_points": 2.0,
+               "sim_value": 0.66,
+               "threshold": 0.99
+          }
+     }
+}

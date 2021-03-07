@@ -1,0 +1,36 @@
+{
+     "url1": "https://www.apple.com/mac/",
+     "url2": "www.apple.com/shop/gift-cards",
+     "stats": {
+          "Content": {
+               "sim_points": 1.5,
+               "max_sim_points": 2.0,
+               "sim_value": 0.24823695345557123,
+               "threshold": 0.25
+          },
+          "Domain": {
+               "sim_points": 2.0,
+               "max_sim_points": 2.0,
+               "sim_value": 1.0,
+               "threshold": 0.66
+          },
+          "Links": {
+               "sim_points": 2.0,
+               "max_sim_points": 2.0,
+               "sim_value": 0.022132796780684104,
+               "threshold": 0.02
+          },
+          "Image-Urls": {
+               "sim_points": 0.0,
+               "max_sim_points": 2.0,
+               "sim_value": 0.0,
+               "threshold": 0.05
+          },
+          "Screenshots": {
+               "sim_points": 0.0,
+               "max_sim_points": 2.0,
+               "sim_value": 0.0,
+               "threshold": 0.99
+          }
+     }
+}
