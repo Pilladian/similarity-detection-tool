@@ -66,12 +66,3 @@ By default the tool will log the outcome of the comparing in the `logs` director
 in the specific domain directory. E.g. `logs/google.com`. With logging enabled it
 will also create a `results.txt` containing all tested URLs and their similarity
 scores.
-
-## Documentation
-The tool is split into three parts. First we have the Typosquatting that generates
-new domains. Second there is the Website Comparison that compares the generated
-domains with the given one. The `main.py` combines both parts.
-Documentation:
-  - [Main](https://github.com/Pilladian/similarity-detection-tool/blob/main/docs/main_file.md)
-  - Typosquatting `TODO: Sasha`
-  - [Website Comparison](https://github.com/Pilladian/similarity-detection-tool/blob/main/docs/Comparer_Class.md)
