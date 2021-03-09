@@ -29,7 +29,7 @@ scores.
 `TODO: Sasha`
 
 ### Website Comparison Tool
-This tool takes two URLs as an input and calculates a similarity score, that represents the suspicious similarity of these two URLs. This is done using different features of the websites. Those features include content, domain, links, image sources and the screenshot of the website.
+This tool takes two URLs as an input and calculates a similarity score, that represents the suspicious similarity of these two websites. This is done using different features of the websites. Those features include content, domain, links, image sources and the screenshots of the websites.
 
 #### Content
 If a website is designed to fool people, the content must be the same or at least very similar. For example on websites like Facebook, Instagram and so on, people are looking for a `Username` and `Password` login field, thus it must be somewhere on the page. Content like this is covered in this feature. Both websites are crawled and the HTML-markup is removed. What's left over is the content of the websites that now will be compared line by line. It checks how many lines of website A are also given in website B and the other way around. The sum of both found lines is then divided by the sum of all lines. This gives the first percentage of similarity.
@@ -57,7 +57,7 @@ The last component is the comparison of the screenshots of both websites. For th
     - This stands for Structural Similarity Algorithm and is an exact implementation of Idea 2.
 
 
-- We chose MSE because it is easy to use and to implement while giving good results in very images. imgcompare.image_diff_percent was chosen because it does the same thing but in a slightly different way. So two references are better then one. We chose the SSIM algorithm because it comes in a library, thus it is super easy to use and brings good results in comparing images that are more different.
+- We chose MSE because it is easy to use and to implement while giving good results in similar images. imgcompare.image_diff_percent was chosen because it does the same thing but in a slightly different way. So two references are better then one. We chose the SSIM algorithm because it comes in a library, thus it is super easy to use and brings good results in comparing images that are more different.
 
 The main Problem in this feature basically is the weakness of colors. That means, that in all implemented algorithms the color of the website has an huge impact of how similar they think the websites are. That means, that the same website in two different colors would have a smaller similarity score than two different websites having the same color. That's because those algorithms do not recognize patterns in images like Convolutional Neural Networks do. So to get better results one should try training a CNN for image recognition to fulfill this task in a better way.
 
