@@ -10,7 +10,17 @@ similarity score how suspicious the compared website is. With our tool companies
 can check for malicious websites, that try to impersonate them.
 
 ## Typosquatting
-`TODO: Sasha`
+Typoquatting is a simple attack based on the idea that a victim makes a mistake while typing the url. There can be many mistakes like missing a letter of the URL while or just simply misspelling a word. <br />
+The work of this project focuses on the miss typing of an URL and using different Top-Level Domains(TLD). E.g. when you try to enter google.com but type hoogle.com or type example.com instead of example.de. <br />
+Also this work focus on similar looking URLs. E.g. google.com and gocgle.com.
+
+### Features
+* Generating new domains based on three criteria
+	* Miss typing on the keyboard, with that all letters around 
+	* Similar looking letters (e.g. o and c or v and u)
+	* Different Top-Level Domains
+* Checking
+	* Check if the domain exist via a DNS lookup over IPv4 
 
 ## Website Comparison Tool
 Given two URLs the tool will look at different features of the websites trying
