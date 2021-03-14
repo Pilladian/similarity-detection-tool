@@ -1,67 +1,44 @@
-# Similarity Detection Tool
+# Documentation
 
-## Description
-In this project we created a tool that is able to detect phishing websites. It takes a domain as input and now scans the internet for domains that look similar to the given one. For that we use a process that is called Typosquatting. If there really exist some of those websites the second component of the tool comes in, the Website Comparison Tool. Now the target website that was given is compared to the generated ones, found earlier. At the end the tool states a similarity score how suspicious the compared website is. With our tool companies can check for malicious websites, that try to impersonate them.
-
-## Installation
-- clone repository
-- run `virtualenv -p python3 similarity-detection-tool` to create the virtual environment
-- run `cd similarity-detection-tool && source bin/activate` to attach to the virtualenv
-- run `chmod +x requirements/requirements.sh && sudo requirements/requirements.sh` to install required packages
-- run `pip3 install -r requirements/requirements.txt` to install required python modules
-
-## Usage
-
-#### Command
-`python3 main.py <domain>`
-Note that the input must only be a domain name not the whole URL. That means that
-you should use `google.com` instead of `https://google.com`
-
-#### Output
-By default the tool will log the outcome of the comparing in the `logs` directory
-in the specific domain directory. E.g. `logs/google.com`. With logging enabled it
-will also create a `results.txt` containing all tested URLs and their similarity
-scores.
-
-## Documentation
-
-### Typosquatting
-`TODO: Sasha`
-
-### Website Comparison Tool
+---
 This tool takes two URLs as an input and calculates a similarity score, that represents the suspicious similarity of these two websites. This is done using different features of the websites. Those features include content, domain, links, image sources and the screenshots of the websites.
 
-#### Content
+---
+
+## Content
 If a website is designed to fool people, the content must be the same or at least very similar. For example on websites like Facebook, Instagram and so on, people are looking for a `Username` and `Password` login field, thus it must be somewhere on the page. Content like this is covered in this feature. Both websites are crawled and the HTML-markup is removed. What's left over is the content of the websites that now will be compared line by line. It checks how many lines of website A are also given in website B and the other way around. The sum of both found lines is then divided by the sum of all lines. This gives the first percentage of similarity.
 
-#### Domain
+## Domain
 Although the normal user does not really have a look at the domain it should be considered anyway. If a website clone should lead people to put in their credentials the domain should be similar to the original one as well. That's why domain comparison is the second percentage we calculate. The tool takes the two given URLs and removes the protocol (https:// or http://) and also the directory path and queries. What's left over is the real domain like for example `www.google.com`. Those two domains are now split into their components which then are compared in the same way like the lines of content. The result is our second similarity percentage.
 
-#### Links
+## Links
 Another very interesting component of websites are links, that point to other websites, images or sub directories. The tool searches for them in both websites and again compares them with each other. Doing so, we get the third similarity percentage.
 
-#### Image Sources
+## Image Sources
 This component basically is the same as Links but with image sources. As well as the other links, they are collected and compared to each other, giving us the fourth similarity percentage.
 
-#### Screenshots
+## Screenshots
 The last component is the comparison of the screenshots of both websites. For that the tool first creates a screenshot of both websites and then compares them with each other. Therefor it uses two different image comparison ideas implemented in three algorithms.
-- **Idea 1:** Here each pixel will be compared with the corresponding pixel of the other image. For that to work it is important to scale the images correctly. Therefore a function is implemented, that scales the second given image like the first one. Then both are compared pixel by pixel.
+
+### Idea 1
+Here each pixel will be compared with the corresponding pixel of the other image. For that to work it is important to scale the images correctly. Therefore a function is implemented, that scales the second given image like the first one. Then both are compared pixel by pixel.
   - *MSE*
     - This stands for Mean Squared Error and is simply a sum over squares of the differences per each single pixel in the images.
   - *imgcompare.image_diff_percent*
     - This basically does the same calculation like MSE but without the squared component.
 
 
-- **Idea 2:** Here the image won't be compared pixel by pixel but in bigger groups of pixels. This is helpful considering the same image but one time scaled a little bigger. While Idea 1 would score worse on images like this, this approach works much better.
+### Idea 2 
+Here the image won't be compared pixel by pixel but in bigger groups of pixels. This is helpful considering the same image but one time scaled a little bigger. While Idea 1 would score worse on images like this, this approach works much better.
   - *SSIM*
     - This stands for Structural Similarity Algorithm and is an exact implementation of Idea 2.
 
 
-- We chose MSE because it is easy to use and to implement while giving good results in similar images. imgcompare.image_diff_percent was chosen because it does the same thing but in a slightly different way. So two references are better then one. We chose the SSIM algorithm because it comes in a library, thus it is super easy to use and brings good results in comparing images that are more different.
+We chose MSE because it is easy to use and to implement while giving good results in similar images. imgcompare.image_diff_percent was chosen because it does the same thing but in a slightly different way. So two references are better then one. We chose the SSIM algorithm because it comes in a library, thus it is super easy to use and brings good results in comparing images that are more different.
 
 The main Problem in this feature basically is the weakness of colors. That means, that in all implemented algorithms the color of the website has an huge impact of how similar they think the websites are. That means, that the same website in two different colors would have a smaller similarity score than two different websites having the same color. That's because those algorithms do not recognize patterns in images like Convolutional Neural Networks do. So to get better results one should try training a CNN for image recognition to fulfill this task in a better way.
 
-#### Calculation of Similarity Score
+## Calculation of Similarity Score
 At this point the tool has 5 percentages, each of them stating how similar the two websites are, considering their features. Now the final similarity score is calculated in the following way:
 
 Each feature has a maximum of 2 similarity points to give. That means, if the percentage is higher than or equal to a set threshold, the full 2 points are given for this feature. If the percentage is smaller then the threshold, the points are calculated based on a percentage elimination.
@@ -72,7 +49,7 @@ Since 0.34 is smaller than 0.4 we will now subtract x * threshold from the origi
 
 This procedure is done for each feature and the final similarity score is the sum of all calculated points.
 
-#### Changing the manner of the project
+## Changing the manner of the project
 If you want to modify the functionality of our tool to be used in another way or simply improve it, you have the following options:
 
 - Set different thresholds for each feature
