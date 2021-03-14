@@ -24,7 +24,7 @@ can check for malicious websites, that try to impersonate them.
 Note that the input must only be a domain name not the whole URL. That means that
 you should use `google.com` instead of `https://google.com`
 
-### Output
+#### Output
 By default the tool will log the outcome of the comparing in the `logs` directory
 in the specific domain directory. E.g. `logs/google.com`. With logging enabled it
 will also create a `results.txt` containing all tested URLs and their similarity
