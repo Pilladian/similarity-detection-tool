@@ -26,12 +26,12 @@ Notes for evaluation:
 
 ## Results
 
-<img src="https://github.com/Pilladian/similarity-detection-tool/blob/main/typosquatting/Evaluation/domains.pdf">
-
-<img src="https://github.com/Pilladian/similarity-detection-tool/blob/main/typosquatting/Evaluation/time.pdf")>
-
-<img src="https://github.com/Pilladian/similarity-detection-tool/blob/main/typosquatting/Evaluation/typo.pdf")>
-
+![png](domains.png)
+</centre>
+![png](time.png)
+</centre>
+![png](typo.png)
+</centre>
 
 ## Takeaways
 For now the DNS lookup time is quite high (see chart 2.1). In addition to that the lookup time for roughly the same amount of domains differs(e.g. ard.de and zdf.de). Since the cache was cleared locally, this could be due to a cache by the DNS server itself or other components. </br >
