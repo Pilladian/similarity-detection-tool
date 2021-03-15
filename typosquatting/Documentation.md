@@ -5,7 +5,7 @@ Generally all informations in the URLGenerator.py about a function can be looked
 ### 1.1 Adding a new file for replacing the characters in the domain:
 1. Add the new file in typosquatting folder.
 2. Add the data to the file. The first line is reserved for a comment. If you put there some data it will be purged. When putting the characters in a line be aware of the format; no spaces and separated by a comma. E.g this works: `a,b,c`. E.g these do not work: `a, c, b` or `a,b,c,` or `a,b,c⎵`.
-3. Add the following two line to the URLGenerator.py after line **102**:<br />
+3. Add the following two line to the URLGenerator.py after line **108**:<br />
 `new_data = self.open_file('<Name of the txt file in the folder>')`<br />
 `temp_url = self.generator(<Flag_A>, <Flag_B>, characters_domain, data, <iteration>, 0)` <br />
 `final_urls.extend(temp_url)` 
@@ -17,7 +17,7 @@ Generally all informations in the URLGenerator.py about a function can be looked
 * For typo.txt:
 	* Newline: When a new line is added, the generator function will try to find a match for **only** the first character of the new line and then start replacing the character of the match found in the domain by all the other character in the line where it found it.
 	* Adding to an existing line: When the first character from the line is equal to the character from the domain it will be replaced by the other character of the line including the newly added one. So it matter where you put the new character. If you put it on first position this is the character that will be compared and and everything after that will be replaced.
-* For similar.txt:
+* For similar.txt and similar_sound.txt:
 	* Newline: When adding a new line then **all** character you add, will be checked to the characters of the domain and then replaced by all of the others character in the added new line.
 	* Adding to an existing line: When adding one or several new characters to an already existing line, then in the generator function it will compare for this new character, as well replace it when finding another character from the line.
 * For the commen_tld.txt: Adding data works by adding a new line and then adding the new tld with a dot in front of it. E.g. ".net". Deleting a tdl works by just deleting the line (including the newline) where the tld is in.

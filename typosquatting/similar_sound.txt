@@ -1,0 +1,5 @@
+# character of similar sounding letters in the english alphabet
+c,k
+s,z,c
+y,i
+a,e,o
