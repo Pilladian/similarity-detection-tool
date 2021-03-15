@@ -33,7 +33,7 @@ def crawl_website(url):
                 ps.append(line)
         return ps
     except Exception as e:
-        print_error(e, 'crawl_website')
+        # print_error(e, 'crawl_website')
         return []
 
 
@@ -106,7 +106,7 @@ def get_percentage_similarity(l1, l2):
     try:
         return float((same1 + same2) / (len(l1) + len(l2)))
     except ZeroDivisionError:
-        print_error(e, 'get_percentage_similarity')
+        # print_error(e, 'get_percentage_similarity')
         return 0.0
 
 def get_hrefs(url):
@@ -127,7 +127,7 @@ def get_hrefs(url):
         return hrefs + links
 
     except Exception as e:
-        print_error(e, 'get_hrefs')
+        # print_error(e, 'get_hrefs')
         return []
 
 
@@ -146,22 +146,27 @@ def get_image_urls(url):
         img_list = [get_image_components(a) for a in img_list]
 
     except Exception as error:
-        print_error(e, 'get_image_urls')
+        pass
+        # print_error(error, 'get_image_urls')
 
     return img_list
 
 
 def create_screenshots(urls):
-    DRIVER = 'chromedriver'
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    driver = webdriver.Chrome(DRIVER, chrome_options=chrome_options)
+    try:
+        DRIVER = 'chromedriver'
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        driver = webdriver.Chrome(DRIVER, chrome_options=chrome_options)
 
-    for n, url in enumerate(urls):
-        driver.get(url)
-        driver.save_screenshot(f'sh_website{n}.png')
+        for n, url in enumerate(urls):
+            driver.get(url)
+            driver.save_screenshot(f'sh_website{n}.png')
 
-    driver.quit()
+        driver.quit()
+    except Exception as error:
+        pass
+        # print_error(error, 'create_screenshots')
 
 
 def mse(img1, img2):

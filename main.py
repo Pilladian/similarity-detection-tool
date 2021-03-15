@@ -18,6 +18,9 @@ def _help():
 
 if __name__ == '__main__':
 
+    # clear window
+    os.system('clear')
+
     # get command line inputs
     if len(sys.argv[1:]) != 1:
         _help()
@@ -30,9 +33,10 @@ if __name__ == '__main__':
         _help()
 
     # generate possible malicious domains
+    print(f'\n [+] Generating domains based on {target_domain}')
     generator = URLGenerator.Generator()
     typo_domains = generator.generate(target_domain, 1)
-    
+
     # append protocol
     typo_urls = []
     connection_error_log = []
@@ -57,15 +61,17 @@ if __name__ == '__main__':
         if not path.exists(f'logs/{target_domain}'):
             os.system(f'mkdir logs/{target_domain}')
 
-    for url in typo_urls:
+    for i, url in enumerate(typo_urls):
+        print(f' [+] Compare website {i + 1} / {len(typo_urls)}', end='\r')
         comparer.set_parameter(target_url, url)
         if _LOGGING:
             comparer.enable_logging(f'logs/{target_domain}/')
         achieved_points, max_points = comparer.compare_websites()
-        print(f'{achieved_points} / {max_points} for comparing {target_url} with {url}')
+        # print(f'\t{achieved_points} / {max_points} for comparing {target_url} with {url}')
         scores.append((url, achieved_points, max_points))
 
     # print results into file: ./logs/<target-domain>/results.txt
+    print(f' [+] Complete\n [+] Results are stored in logs/{target_domain}/results.txt\n')
     with open(f'logs/{target_domain}/results.txt', 'w') as result_file:
         for url, score, max_score in scores:
             result_file.write(f'{score} / {max_score} for [ {url} ]\n')

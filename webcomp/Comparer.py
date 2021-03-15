@@ -47,27 +47,31 @@ def _compare_image_sources(url1, url2):
 def _compare_screenshots(url1, url2):
     Helper.create_screenshots([url1, url2])
 
-    image1 = cv2.imread('sh_website0.png')
-    image2 = cv2.imread('sh_website1.png')
+    try:
+        image1 = cv2.imread('sh_website0.png')
+        image2 = cv2.imread('sh_website1.png')
 
-    image1, image2 = Helper.scale(image1, image2)
+        image1, image2 = Helper.scale(image1, image2)
 
-    mse = Helper.mse(image1, image2)
-    ssim = structural_similarity(image1, image2, multichannel=True)
-    sim = Helper.sim('sh_website0.png', 'sh_website1.png')
+        mse = Helper.mse(image1, image2)
+        ssim = structural_similarity(image1, image2, multichannel=True)
+        sim = Helper.sim('sh_website0.png', 'sh_website1.png')
 
-    value = 0.0
+        value = 0.0
 
-    if mse < 4000:
-        value += 0.33
-    if ssim > 0.85:
-        value += 0.33
-    if sim > 0.97:
-        value += 0.33
+        if mse < 4000:
+            value += 0.33
+        if ssim > 0.85:
+            value += 0.33
+        if sim > 0.97:
+            value += 0.33
 
-    # delete created screenshots
-    os.system('rm sh_website0.png sh_website1.png')
-    return value
+        # delete created screenshots
+        os.system('rm sh_website0.png sh_website1.png')
+        return value
+
+    except:
+        return 0.0
 
 
 def _calculate_points(content,   domains,   links,     img_sources, screen,
