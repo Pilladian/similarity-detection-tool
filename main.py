@@ -20,6 +20,7 @@ if __name__ == '__main__':
 
     # clear window
     os.system('clear')
+    print('\n [+] Initialization')
 
     # get command line inputs
     if len(sys.argv[1:]) != 2:
@@ -31,14 +32,14 @@ if __name__ == '__main__':
         target_url = requests.get(f'http://{target_domain}').url
     except Exception as e:
         _help()
-    
+
     # typos
     typos = sys.argv[2]
-    
+
     # generate possible malicious domains
-    print(f'\n [+] Generating domains based on {target_domain}')
+    print(f' [+] Generating domains based on {target_domain}')
     generator = URLGenerator.Generator()
-    typo_domains = generator.generate(target_domain, typos)
+    typo_domains = generator.generate(target_domain, int(typos))
 
     # append protocol
     typo_urls = []
@@ -65,7 +66,10 @@ if __name__ == '__main__':
             os.system(f'mkdir logs/{target_domain}')
 
     for i, url in enumerate(typo_urls):
-        print(f' [+] Compare website {i + 1} / {len(typo_urls)}', end='\r')
+        if i == len(typo_urls) - 1:
+            print(f' [+] Compare website {i + 1} / {len(typo_urls)}')
+        else:
+            print(f' [+] Compare website {i + 1} / {len(typo_urls)}', end='\r')
         comparer.set_parameter(target_url, url)
         if _LOGGING:
             comparer.enable_logging(f'logs/{target_domain}/')
