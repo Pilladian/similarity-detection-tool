@@ -20,9 +20,10 @@ can check for malicious websites, that try to impersonate them.
 ## Usage
 
 #### Command
-`python3 main.py <domain>`
+`python3 main.py <domain> <typos>`
 Note that the input must only be a domain name not the whole URL. That means that
-you should use `google.com` instead of `https://google.com`
+you should use `google.com` instead of `https://google.com` </br >
+If you want as many typo-domain generations as possible set the value to -2.
 
 #### Output
 By default the tool will log the outcome of the comparing in the `logs` directory
@@ -41,6 +42,7 @@ Also this work focus on similar looking URLs. E.g. google.com and gocgle.com.
 * Generating new domains based on three criteria
 	* Miss typing on the keyboard, with that all letters around 
 	* Similar looking letters (e.g. o and c or v and u)
+	* Similar sounding letters (e.g. y and i)
 	* Different Top-Level Domains
 * Checking
 	* Check if the domain exist via a DNS lookup over IPv4 

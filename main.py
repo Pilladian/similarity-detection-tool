@@ -11,7 +11,7 @@ import os.path as path
 
 def _help():
     print()
-    print(f'Usage: python3 main.py <domain>')
+    print(f'Usage: python3 main.py <domain> <typos>')
     print(f'The argument must be a domain. More precisely google.com instead of https://google.com')
     exit(0)
 
@@ -22,7 +22,7 @@ if __name__ == '__main__':
     os.system('clear')
 
     # get command line inputs
-    if len(sys.argv[1:]) != 1:
+    if len(sys.argv[1:]) != 2:
         _help()
 
     # URLs
@@ -31,11 +31,14 @@ if __name__ == '__main__':
         target_url = requests.get(f'http://{target_domain}').url
     except Exception as e:
         _help()
-
+    
+    # typos
+    typos = sys.argv[2]
+    
     # generate possible malicious domains
     print(f'\n [+] Generating domains based on {target_domain}')
     generator = URLGenerator.Generator()
-    typo_domains = generator.generate(target_domain, 1)
+    typo_domains = generator.generate(target_domain, typos)
 
     # append protocol
     typo_urls = []

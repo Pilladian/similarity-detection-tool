@@ -25,11 +25,17 @@ Notes for evaluation:
 *Before every DNS lookup the cache was cleared locally and the DNS server 1.1.1.1 and 1.0.0.1 where taken.*
 
 ## Results
-
-![png](domains.png)
+Chart 1.1: Shows the second level domains generated for the ten evaluation URLs via the different files (similar_sound.txt, similar.txt and typo.txt).
+![png](domain_1.png)
 </centre>
+Chart 1.2: Shows the fully generated domains with TLDs and then how many are active after the DNS lookup.
+![png](domain_2.png)
+</centre>
+Chart 2.1: The different DNS lookups for the ten evaluation URLs.
 ![png](time.png)
 </centre>
+Chart 3.1: The generated second level domains with one and two typos.
+Chart 3.2: The fully generated domains with one and two typos.
 ![png](typo.png)
 </centre>
 

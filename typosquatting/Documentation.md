@@ -24,7 +24,7 @@ Generally all informations in the URLGenerator.py about a function can be looked
 
 ## Increase typos:
 
-Go into the main.py file and find the line with the following code: `typo_domains = generator.generate(target_domain, 1)` and change the typo "1" by the number of typos you want. If you want as many typo-domain generations as possible set the value to -2.
+Can be changed via the command input values. If you want as many typo-domain generations as possible set the value to -2.
 
 
 # Making sense of the functions:
