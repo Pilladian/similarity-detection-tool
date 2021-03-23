@@ -58,7 +58,7 @@ Each feature has a maximum of 2 similarity points to give. That means, if the pe
 
 **Here is a short example:** Let's consider a percentage of `0.34` and a threshold of `0.4`. Clearly 0.34 is smaller than 0.4 so it won't achieve 2 points. We now define a percentage x = `0.2`. This is now used for calculating the points:
 
-Since 0.34 is smaller than 0.4 we will now subtract x * threshold from the original threshold. That means that the new threshold is `0.34 - (0.2 * 0.34) = 0.272`. For each of those iterations the maximum similarity points get decreased by `0.5`. Since `0.34` is now greater than `0.272` the requirement is fulfilled and the feature would achieve `1.5` similarity points.
+Since 0.34 is smaller than 0.4 we will now subtract x * threshold from the original threshold. That means that the new threshold is `0.4 - (0.2 * 0.4) = 0.32`. For each of those iterations the maximum similarity points get decreased by `0.5`. Since `0.34` is now greater than `0.32` the requirement is fulfilled and the feature would achieve `1.5` similarity points.
 
 This procedure is done for each feature and the final similarity score is the sum of all calculated points.
 
