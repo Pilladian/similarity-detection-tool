@@ -9,4 +9,3 @@ logs/
 sh_website*
 .ipynb_checkpoints/
 etc/
-eval_results
